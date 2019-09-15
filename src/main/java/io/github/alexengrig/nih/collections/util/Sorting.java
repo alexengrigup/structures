@@ -5,14 +5,14 @@ public class Sorting {
     }
 
     public static void insertion(int[] input) {
-        for (int forth = 1, length = input.length; forth < length; ++forth) {
-            int key = input[forth];
-            int back = forth - 1;
-            while (back >= 0 && input[back] > key) {
-                input[back + 1] = input[back];
-                back--;
+        for (int right = 1, length = input.length; right < length; ++right) {
+            int key = input[right];
+            int left = right - 1;
+            while (left >= 0 && input[left] > key) {
+                input[left + 1] = input[left];
+                left--;
             }
-            input[back + 1] = key;
+            input[left + 1] = key;
         }
     }
 }

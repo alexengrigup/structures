@@ -2,6 +2,9 @@ package io.github.alexengrig.nih.collections.util;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Random;
+
 import static org.junit.Assert.assertArrayEquals;
 
 public class SortingTest {
@@ -31,5 +34,12 @@ public class SortingTest {
         int[] ints = {3, 1, 2};
         Sorting.insertion(ints);
         assertArrayEquals(new int[]{1, 2, 3}, ints);
+    }
+
+    @Test
+    public void checkInsertionForRandom() {
+        int[] ints = new Random().ints(100).toArray();
+        Sorting.insertion(ints);
+        assertArrayEquals(Arrays.stream(ints).sorted().toArray(), ints);
     }
 }
