@@ -6,12 +6,11 @@ public class Sorting {
 
     public static void insertion(int[] input) {
         for (int right = 1, length = input.length; right < length; ++right) {
-            int key = input[right];
             int left = right - 1;
-            for (; left >= 0 && input[left] > key; left--) {
+            for (; left >= 0 && input[left] > input[right]; left--) {
                 input[left + 1] = input[left];
             }
-            input[left + 1] = key;
+            input[left + 1] = input[right];
         }
     }
 
