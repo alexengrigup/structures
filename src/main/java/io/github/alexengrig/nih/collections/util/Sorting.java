@@ -85,9 +85,10 @@ public class Sorting {
      * @param input The array to sort
      */
     public static void selection(int[] input) {
-        for (int major = 0, length = input.length; major < length - 1; major++) {
-            int min = major;
-            for (int minor = major + 1; minor < length; minor++) {
+        int length = input.length, major, min, minor;
+        for (major = 0; major < length - 1; major++) {
+            min = major;
+            for (minor = major + 1; minor < length; minor++) {
                 if (input[min] > input[minor]) {
                     min = minor;
                 }
