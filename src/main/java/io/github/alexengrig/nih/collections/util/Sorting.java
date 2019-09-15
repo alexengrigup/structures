@@ -27,6 +27,25 @@ public class Sorting {
         }
     }
 
+    /**
+     * Example:
+     * <pre>
+     *     input: [3 5 4 1 2]
+     *            [<u>3</u> 5 4 1 2]: 3 &lt 5
+     *            [3 <u>5</u> 4 1 2]: 5 <b>&gt</b> 4
+     *            [3 4 <u>5</u> 1 2]: 5 <b>&gt</b> 1
+     *            [3 4 1 <u>5</u> 2]: 5 <b>&gt</b> 2
+     *            [3 4 1 2 <u>5</u>]: 5 <b>&gt</b> 2
+     *            [<u>3</u> 4 1 2 <b>5</b>]: 3 &lt 4
+     *            [3 <u>4</u> 1 2 <b>5</b>]: 4 <b>&gt</b> 1
+     *            [3 1 <u>4</u> 2 <b>5</b>]: 4 <b>&gt</b> 2
+     *            [<u>3</u> 1 2 <b>4</b> <b>5</b>]: 3 <b>&gt</b> 1
+     *            [1 <u>3</u> 2 <b>4</b> <b>5</b>]: 3 <b>&gt</b> 2
+     *    output: [1 2 3 4 5]
+     * </pre>
+     *
+     * @param input The array to sort
+     */
     public static void bubble(int[] input) {
         for (int major = 0, length = input.length; major < length - 1; major++) {
             boolean swap = false;
