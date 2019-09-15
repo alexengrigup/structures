@@ -38,6 +38,32 @@ public class Sorting {
     /**
      * Example:
      * <pre>
+     *     input: [3 5 4 1 2] <u>current</u>, <b>sorted</b>, <i>min</i>
+     *            [<u>3</u> 5 4 <i>1</i> 2]
+     *            [<b>1</b> <u>3</u> 5 4 <i>2</i>]
+     *            [<b>1</b> <b>2</b> <u><i>3</i></u> 5 4]
+     *            [<b>1</b> <b>2</b> <b>3</b> <u>5</u> <i>4</i>]
+     *    output: [1 2 3 4 5]
+     * </pre>
+     *
+     * @param input The array to sort
+     */
+    public static void selection(int[] input) {
+        int length = input.length, major, min, minor;
+        for (major = 0; major < length - 1; major++) {
+            min = major;
+            for (minor = major + 1; minor < length; minor++) {
+                if (input[min] > input[minor]) {
+                    min = minor;
+                }
+            }
+            swap(input, major, min);
+        }
+    }
+
+    /**
+     * Example:
+     * <pre>
      *     input: [3 5 4 1 2]
      *            [<u>3</u> 5 4 1 2]: 3 &lt 5
      *            [3 <u>5</u> 4 1 2]: 5 <b>&gt</b> 4
@@ -68,32 +94,6 @@ public class Sorting {
             if (!swap) {
                 break;
             }
-        }
-    }
-
-    /**
-     * Example:
-     * <pre>
-     *     input: [3 5 4 1 2] <u>current</u>, <b>sorted</b>, <i>min</i>
-     *            [<u>3</u> 5 4 <i>1</i> 2]
-     *            [<b>1</b> <u>3</u> 5 4 <i>2</i>]
-     *            [<b>1</b> <b>2</b> <u><i>3</i></u> 5 4]
-     *            [<b>1</b> <b>2</b> <b>3</b> <u>5</u> <i>4</i>]
-     *    output: [1 2 3 4 5]
-     * </pre>
-     *
-     * @param input The array to sort
-     */
-    public static void selection(int[] input) {
-        int length = input.length, major, min, minor;
-        for (major = 0; major < length - 1; major++) {
-            min = major;
-            for (minor = major + 1; minor < length; minor++) {
-                if (input[min] > input[minor]) {
-                    min = minor;
-                }
-            }
-            swap(input, major, min);
         }
     }
 }
