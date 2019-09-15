@@ -4,6 +4,12 @@ public class Sorting {
     private Sorting() {
     }
 
+    public static void swap(int[] input, int from, int to) {
+        int buffer = input[from];
+        input[from] = input[to];
+        input[to] = buffer;
+    }
+
     /**
      * Example:
      * <pre>
@@ -52,9 +58,7 @@ public class Sorting {
             boolean swap = false;
             for (int minor = 0; minor < length - major - 1; minor++) {
                 if (input[minor] > input[minor + 1]) {
-                    int buffer = input[minor];
-                    input[minor] = input[minor + 1];
-                    input[minor + 1] = buffer;
+                    swap(input, minor, minor + 1);
                     swap = true;
                 }
             }
@@ -85,9 +89,7 @@ public class Sorting {
                     min = minor;
                 }
             }
-            int buffer = input[major];
-            input[major] = input[min];
-            input[min] = buffer;
+            swap(input, major, min);
         }
     }
 }
