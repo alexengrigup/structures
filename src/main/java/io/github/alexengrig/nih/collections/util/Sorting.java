@@ -96,4 +96,30 @@ public class Sorting {
             }
         }
     }
+
+    public static void cocktail(int[] input) {
+        int start = 0, end = input.length, i;
+        boolean swap = true;
+        for (; swap; ) {
+            swap = false;
+            for (i = start; i < end - 1; i++) {
+                if (input[i] > input[i + 1]) {
+                    swap(input, i, i + 1);
+                    swap = true;
+                }
+            }
+            if (!swap) {
+                break;
+            }
+            swap = false;
+            end--;
+            for (i = end - 1; i >= start; i--) {
+                if (input[i] > input[i + 1]) {
+                    swap(input, i, i + 1);
+                    swap = true;
+                }
+            }
+            start++;
+        }
+    }
 }

@@ -112,4 +112,39 @@ public class SortingTest {
         Sorting.bubble(ints);
         assertArrayEquals(Arrays.stream(ints).sorted().toArray(), ints);
     }
+
+    @Test
+    public void checkCocktailForEmpty() {
+        int[] ints = {};
+        Sorting.cocktail(ints);
+        assertArrayEquals(new int[]{}, ints);
+    }
+
+    @Test
+    public void checkCocktailForSingleton() {
+        int[] ints = {1};
+        Sorting.cocktail(ints);
+        assertArrayEquals(new int[]{1}, ints);
+    }
+
+    @Test
+    public void checkCocktailForDouble() {
+        int[] ints = {2, 1};
+        Sorting.cocktail(ints);
+        assertArrayEquals(new int[]{1, 2}, ints);
+    }
+
+    @Test
+    public void checkCocktailForSimple() {
+        int[] ints = {3, 1, 2};
+        Sorting.cocktail(ints);
+        assertArrayEquals(new int[]{1, 2, 3}, ints);
+    }
+
+    @Test
+    public void checkCocktailForRandom() {
+        int[] ints = new Random().ints(100).toArray();
+        Sorting.cocktail(ints);
+        assertArrayEquals(Arrays.stream(ints).sorted().toArray(), ints);
+    }
 }
