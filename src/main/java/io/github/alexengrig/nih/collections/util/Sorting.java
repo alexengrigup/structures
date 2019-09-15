@@ -64,6 +64,19 @@ public class Sorting {
         }
     }
 
+    /**
+     * Example:
+     * <pre>
+     *     input: [3 5 4 1 2] <u>current</u>, <b>sorted</b>, <i>min</i>
+     *            [<u>3</u> 5 4 <i>1</i> 2]
+     *            [<b>1</b> <u>3</u> 5 4 <i>2</i>]
+     *            [<b>1</b> <b>2</b> <u><i>3</i></u> 5 4]
+     *            [<b>1</b> <b>2</b> <b>3</b> <u>5</u> <i>4</i>]
+     *    output: [1 2 3 4 5]
+     * </pre>
+     *
+     * @param input The array to sort
+     */
     public static void selection(int[] input) {
         for (int major = 0, length = input.length; major < length - 1; major++) {
             int min = major;
