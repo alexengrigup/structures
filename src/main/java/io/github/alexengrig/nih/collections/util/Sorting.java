@@ -55,9 +55,11 @@ public class Sorting {
      * @param input The array to sort
      */
     public static void bubble(int[] input) {
-        for (int major = 0, length = input.length; major < length - 1; major++) {
-            boolean swap = false;
-            for (int minor = 0; minor < length - major - 1; minor++) {
+        int length = input.length, major, minor;
+        boolean swap;
+        for (major = 0; major < length - 1; major++) {
+            swap = false;
+            for (minor = 0; minor < length - major - 1; minor++) {
                 if (input[minor] > input[minor + 1]) {
                     swap(input, minor, minor + 1);
                     swap = true;
