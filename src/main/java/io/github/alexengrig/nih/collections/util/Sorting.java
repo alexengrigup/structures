@@ -4,6 +4,19 @@ public class Sorting {
     private Sorting() {
     }
 
+    /**
+     * Example:
+     * <pre>
+     *     input: [3 5 4 1 2]
+     *            [3 <u>5</u> 4 1 2]: 3 &lt 5
+     *            [3 5 <u>4</u> 1 2]: 5 <b>&gt</b> 4, 3 &lt 4
+     *            [3 4 5 <u>1</u> 2]: 5 <b>&gt</b> 1, 4 <b>&gt</b> 1, 3 <b>&gt</b> 1
+     *            [1 3 4 5 <u>2</u>]: 5 <b>&gt</b> 2, 4 <b>&gt</b> 2, 3 <b>&gt</b> 2, 1 &lt 2
+     *    output: [1 2 3 4 5]
+     * </pre>
+     *
+     * @param input The array to sort
+     */
     public static void insertion(int[] input) {
         for (int right = 1, length = input.length; right < length; ++right) {
             int left = right - 1;
