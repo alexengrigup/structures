@@ -77,4 +77,39 @@ public class SortingTest {
         Sorting.bubble(ints);
         assertArrayEquals(Arrays.stream(ints).sorted().toArray(), ints);
     }
+
+    @Test
+    public void checkSelectionForEmpty() {
+        int[] ints = {};
+        Sorting.selection(ints);
+        assertArrayEquals(new int[]{}, ints);
+    }
+
+    @Test
+    public void checkSelectionForSingleton() {
+        int[] ints = {1};
+        Sorting.selection(ints);
+        assertArrayEquals(new int[]{1}, ints);
+    }
+
+    @Test
+    public void checkSelectionForDouble() {
+        int[] ints = {2, 1};
+        Sorting.selection(ints);
+        assertArrayEquals(new int[]{1, 2}, ints);
+    }
+
+    @Test
+    public void checkSelectionForSimple() {
+        int[] ints = {3, 1, 2};
+        Sorting.selection(ints);
+        assertArrayEquals(new int[]{1, 2, 3}, ints);
+    }
+
+    @Test
+    public void checkSelectionForRandom() {
+        int[] ints = new Random().ints(100).toArray();
+        Sorting.selection(ints);
+        assertArrayEquals(Arrays.stream(ints).sorted().toArray(), ints);
+    }
 }

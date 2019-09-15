@@ -64,5 +64,17 @@ public class Sorting {
         }
     }
 
-
+    public static void selection(int[] input) {
+        for (int major = 0, length = input.length; major < length - 1; major++) {
+            int min = major;
+            for (int minor = major + 1; minor < length; minor++) {
+                if (input[min] > input[minor]) {
+                    min = minor;
+                }
+            }
+            int buffer = input[major];
+            input[major] = input[min];
+            input[min] = buffer;
+        }
+    }
 }
