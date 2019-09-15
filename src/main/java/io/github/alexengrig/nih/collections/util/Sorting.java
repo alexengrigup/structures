@@ -24,9 +24,10 @@ public class Sorting {
      * @param input The array to sort
      */
     public static void insertion(int[] input) {
-        for (int right = 1, length = input.length; right < length; ++right) {
-            int key = input[right];
-            int left = right - 1;
+        int length = input.length, right, key, left;
+        for (right = 1; right < length; ++right) {
+            key = input[right];
+            left = right - 1;
             for (; left >= 0 && input[left] > key; left--) {
                 input[left + 1] = input[left];
             }
