@@ -8,9 +8,8 @@ public class Sorting {
         for (int right = 1, length = input.length; right < length; ++right) {
             int key = input[right];
             int left = right - 1;
-            while (left >= 0 && input[left] > key) {
+            for (; left >= 0 && input[left] > key; left--) {
                 input[left + 1] = input[left];
-                left--;
             }
             input[left + 1] = key;
         }
@@ -32,4 +31,6 @@ public class Sorting {
             }
         }
     }
+
+
 }
