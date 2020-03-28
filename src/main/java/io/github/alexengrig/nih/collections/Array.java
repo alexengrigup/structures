@@ -1,26 +1,26 @@
 package io.github.alexengrig.nih.collections;
 
-public class YaArray<E> {
+public class Array<E> {
     protected static final Object NULL = new Object();
     protected int begin;
     protected int end;
     protected E[] elements;
 
     @SuppressWarnings("unchecked")
-    public YaArray(int length) {
+    public Array(int length) {
         begin = 0;
         end = 0;
         elements = (E[]) new Object[length];
         nullify(0);
     }
 
-    public YaArray(E[] values) {
+    public Array(E[] values) {
         this(values.length);
         addAll(values);
     }
 
     @SafeVarargs
-    public YaArray(E value, E... values) {
+    public Array(E value, E... values) {
         this(1 + values.length);
         add(value);
         addAll(values);
