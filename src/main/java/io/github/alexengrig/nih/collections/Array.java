@@ -1,17 +1,17 @@
 package io.github.alexengrig.nih.collections;
 
 public class Array<E> {
-    protected static final Object NULL = new Object();
     protected int begin;
     protected int end;
+    protected int size;
     protected E[] elements;
 
     @SuppressWarnings("unchecked")
     public Array(int length) {
         begin = 0;
         end = 0;
+        size = 0;
         elements = (E[]) new Object[length];
-        nullify(0);
     }
 
     public Array(E[] values) {
@@ -23,51 +23,78 @@ public class Array<E> {
     public Array(E value, E... values) {
         this(1 + values.length);
         add(value);
-        addAll(values);
+        if (values.length > 0) addAll(values);
+    }
+
+    public int size() {
+        return size;
     }
 
     public int length() {
         return elements.length;
     }
 
-    public int size() {
-        if (begin != end) {
-            return Math.abs(end - begin);
-        } else {
-            return isEmpty() ? 0 : length();
-        }
-    }
-
     public boolean isEmpty() {
-        return begin == 0 && end == 0 || begin == end && elements[end] == NULL;
+        return size() == 0;
     }
 
     public boolean isFull() {
-        return begin == 0 && end == length() || begin != 0 && begin == end && elements[end] != NULL;
+        return size() == length();
     }
 
     public void add(E value) {
-        if (isFull()) {
-            throw new RuntimeException("Array is full");
-        }
+        requireNonFull();
+        size++;
         elements[end++] = value;
-        if (begin != 0 && begin == end) nullify(end);
+        if (end >= length()) end = 0;
     }
 
     public void addAll(E[] values) {
-        if (isFull()) {
-            throw new RuntimeException("Array is full");
-        } else if (size() + values.length > length()) {
-            throw new RuntimeException("Not enough array length to add");
-        }
+        requireNonFull();
+        if (size() + values.length > length()) throw new RuntimeException("Not enough array length to add");
+        size += values.length;
         for (E value : values) {
             elements[end++] = value;
+            if (end >= length()) end = 0;
         }
-        if (begin != 0 && begin == end) nullify(end);
     }
 
-    @SuppressWarnings("unchecked")
-    protected void nullify(int index) {
-        elements[index] = (E) NULL;
+    public E removeFirst() {
+        requireNonEmpty();
+        final E target = elements[begin];
+        elements[begin++] = null;
+        if (begin >= length()) begin = 0;
+        size--;
+        return target;
+    }
+
+    public E removeLast() {
+        requireNonEmpty();
+        if (--end < 0) end = length() - 1;
+        final E target = elements[end];
+        elements[end] = null;
+        size--;
+        return target;
+    }
+
+    public E remove(int index) {
+        requireNonEmpty();
+        final int targetIndex = (begin + index) % length();
+        final E target = elements[targetIndex];
+        for (int i = targetIndex, last = --end; i < last; i++) {
+            elements[i] = elements[i + 1];
+        }
+        if (end < 0) end = 0;
+        elements[end] = null;
+        size--;
+        return target;
+    }
+
+    private void requireNonEmpty() {
+        if (isEmpty()) throw new RuntimeException("Array is empty");
+    }
+
+    private void requireNonFull() {
+        if (isFull()) throw new RuntimeException("Array is full");
     }
 }
