@@ -59,6 +59,28 @@ public class Array<E> {
         }
     }
 
+    public E get(int index) {
+        final int targetIndex = getIndex(index);
+        return elements[targetIndex];
+    }
+
+    public E remove(int index) {
+        requireNonEmpty();
+        final int targetIndex = getIndex(index);
+        final E target = elements[targetIndex];
+        for (int i = targetIndex, last = --end; i < last; i++) {
+            elements[i] = elements[i + 1];
+        }
+        if (end < 0) end = 0;
+        elements[end] = null;
+        size--;
+        return target;
+    }
+
+    private int getIndex(int index) {
+        return (begin + index) % length();
+    }
+
     public E removeFirst() {
         requireNonEmpty();
         final E target = elements[begin];
@@ -72,19 +94,6 @@ public class Array<E> {
         requireNonEmpty();
         if (--end < 0) end = length() - 1;
         final E target = elements[end];
-        elements[end] = null;
-        size--;
-        return target;
-    }
-
-    public E remove(int index) {
-        requireNonEmpty();
-        final int targetIndex = (begin + index) % length();
-        final E target = elements[targetIndex];
-        for (int i = targetIndex, last = --end; i < last; i++) {
-            elements[i] = elements[i + 1];
-        }
-        if (end < 0) end = 0;
         elements[end] = null;
         size--;
         return target;
