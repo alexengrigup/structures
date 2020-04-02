@@ -61,10 +61,24 @@ public class ArrayTest {
     }
 
     @Test
-    public void should_return_value_from_array() {
+    public void should_return_value_by_index_from_array() {
         final Object expected = new Object();
         final Array<Object> array = new Array<>(new Object(), expected);
         assertEquals("Element at index 1", expected, array.get(1));
+    }
+
+    @Test
+    public void should_return_firstValue_from_array() {
+        final Object expected = new Object();
+        final Array<Object> array = new Array<>(expected, new Object());
+        assertEquals("First element", expected, array.getFirst());
+    }
+
+    @Test
+    public void should_return_lastValue_from_array() {
+        final Object expected = new Object();
+        final Array<Object> array = new Array<>(new Object(), expected);
+        assertEquals("Last element", expected, array.getLast());
     }
 
     @Test

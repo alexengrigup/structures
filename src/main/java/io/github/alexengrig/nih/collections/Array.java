@@ -60,8 +60,19 @@ public class Array<E> {
     }
 
     public E get(int index) {
+        requireNonEmpty();
         final int targetIndex = getIndex(index);
         return elements[targetIndex];
+    }
+
+    public E getFirst() {
+        requireNonEmpty();
+        return get(getFirstIndex());
+    }
+
+    public E getLast() {
+        requireNonEmpty();
+        return get(getLastIndex());
     }
 
     public E remove(int index) {
@@ -75,10 +86,6 @@ public class Array<E> {
         elements[end] = null;
         size--;
         return target;
-    }
-
-    private int getIndex(int index) {
-        return (begin + index) % length();
     }
 
     public E removeFirst() {
@@ -97,6 +104,18 @@ public class Array<E> {
         elements[end] = null;
         size--;
         return target;
+    }
+
+    private int getIndex(int index) {
+        return (begin + index) % length();
+    }
+
+    private int getFirstIndex() {
+        return begin;
+    }
+
+    private int getLastIndex() {
+        return isEmpty() ? 0 : (end - 1 + length()) % length();
     }
 
     private void requireNonEmpty() {
