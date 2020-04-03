@@ -82,14 +82,18 @@ public class ArrayTest {
     }
 
     @Test
-    public void should_remove_value_from_array() {
+    public void should_remove_value_from_singletonArray() {
         final Object expected = new Object();
         final Array<Object> array = new Array<>(expected);
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 0, array.end);
         assertEquals("Array length", 1, array.length());
         assertEquals("Array size", 1, array.size());
         assertFalse("Array must be empty", array.isEmpty());
         assertTrue("Array must be full", array.isFull());
         final Object actual = array.remove(0);
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 0, array.end);
         assertEquals("Array length", 1, array.length());
         assertEquals("Array size", 0, array.size());
         assertTrue("Array must be empty", array.isEmpty());
@@ -98,14 +102,38 @@ public class ArrayTest {
     }
 
     @Test
-    public void should_remove_firstValue_from_array() {
+    public void should_remove_value_from_doubleArray() {
+        final Object expected = new Object();
+        final Array<Object> array = new Array<>(expected, new Object());
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 0, array.end);
+        assertEquals("Array length", 2, array.length());
+        assertEquals("Array size", 2, array.size());
+        assertFalse("Array must be empty", array.isEmpty());
+        assertTrue("Array must be full", array.isFull());
+        final Object actual = array.remove(0);
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 1, array.end);
+        assertEquals("Array length", 2, array.length());
+        assertEquals("Array size", 1, array.size());
+        assertFalse("Array must be empty", array.isEmpty());
+        assertFalse("Array must be full", array.isFull());
+        assertEquals("Removed element", expected, actual);
+    }
+
+    @Test
+    public void should_remove_firstValue_from_singletonArray() {
         final Object expected = new Object();
         final Array<Object> array = new Array<>(expected);
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 0, array.end);
         assertEquals("Array length", 1, array.length());
         assertEquals("Array size", 1, array.size());
         assertFalse("Array must be empty", array.isEmpty());
         assertTrue("Array must be full", array.isFull());
         final Object actual = array.removeFirst();
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 0, array.end);
         assertEquals("Array length", 1, array.length());
         assertEquals("Array size", 0, array.size());
         assertTrue("Array must be empty", array.isEmpty());
@@ -114,17 +142,61 @@ public class ArrayTest {
     }
 
     @Test
-    public void should_remove_lastValue_from_array() {
+    public void should_remove_firstValue_from_doubleArray() {
+        final Object expected = new Object();
+        final Array<Object> array = new Array<>(expected, new Object());
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 0, array.end);
+        assertEquals("Array length", 2, array.length());
+        assertEquals("Array size", 2, array.size());
+        assertFalse("Array must be empty", array.isEmpty());
+        assertTrue("Array must be full", array.isFull());
+        final Object actual = array.removeFirst();
+        assertEquals("Begin", 1, array.begin);
+        assertEquals("End", 0, array.end);
+        assertEquals("Array length", 2, array.length());
+        assertEquals("Array size", 1, array.size());
+        assertFalse("Array must be empty", array.isEmpty());
+        assertFalse("Array must be full", array.isFull());
+        assertEquals("Removed element", expected, actual);
+    }
+
+    @Test
+    public void should_remove_lastValue_from_singletonArray() {
         final Object expected = new Object();
         final Array<Object> array = new Array<>(expected);
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 0, array.end);
         assertEquals("Array length", 1, array.length());
         assertEquals("Array size", 1, array.size());
         assertFalse("Array must be empty", array.isEmpty());
         assertTrue("Array must be full", array.isFull());
         final Object actual = array.removeLast();
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 0, array.end);
         assertEquals("Array length", 1, array.length());
         assertEquals("Array size", 0, array.size());
         assertTrue("Array must be empty", array.isEmpty());
+        assertFalse("Array must be full", array.isFull());
+        assertEquals("Removed element", expected, actual);
+    }
+
+    @Test
+    public void should_remove_lastValue_from_doubleArray() {
+        final Object expected = new Object();
+        final Array<Object> array = new Array<>(new Object(), expected);
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 0, array.end);
+        assertEquals("Array length", 2, array.length());
+        assertEquals("Array size", 2, array.size());
+        assertFalse("Array must be empty", array.isEmpty());
+        assertTrue("Array must be full", array.isFull());
+        final Object actual = array.removeLast();
+        assertEquals("Begin", 0, array.begin);
+        assertEquals("End", 1, array.end);
+        assertEquals("Array length", 2, array.length());
+        assertEquals("Array size", 1, array.size());
+        assertFalse("Array must be empty", array.isEmpty());
         assertFalse("Array must be full", array.isFull());
         assertEquals("Removed element", expected, actual);
     }

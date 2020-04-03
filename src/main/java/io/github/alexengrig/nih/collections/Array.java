@@ -1,17 +1,17 @@
 package io.github.alexengrig.nih.collections;
 
 public class Array<E> {
+    protected E[] elements;
     protected int begin;
     protected int end;
     protected int size;
-    protected E[] elements;
 
     @SuppressWarnings("unchecked")
     public Array(int length) {
+        elements = (E[]) new Object[length];
         begin = 0;
         end = 0;
         size = 0;
-        elements = (E[]) new Object[length];
     }
 
     public Array(E[] values) {
@@ -35,34 +35,37 @@ public class Array<E> {
     }
 
     public boolean isEmpty() {
-        return size() == 0;
+        return size == 0;
     }
 
     public boolean isFull() {
-        return size() == length();
+        return size == elements.length;
     }
+
+//    Add
 
     public void add(E value) {
         requireNonFull();
+        elements[end] = value;
+        end = incrementIndex(end);
         size++;
-        elements[end++] = value;
-        if (end >= length()) end = 0;
     }
 
     public void addAll(E[] values) {
         requireNonFull();
-        if (size() + values.length > length()) throw new RuntimeException("Not enough array length to add");
-        size += values.length;
+        requireCapacity(values.length);
         for (E value : values) {
-            elements[end++] = value;
-            if (end >= length()) end = 0;
+            elements[end] = value;
+            end = incrementIndex(end);
         }
+        size += values.length;
     }
+
+//    Get
 
     public E get(int index) {
         requireNonEmpty();
-        final int targetIndex = getIndex(index);
-        return elements[targetIndex];
+        return elements[getIndex(index)];
     }
 
     public E getFirst() {
@@ -75,15 +78,19 @@ public class Array<E> {
         return get(getLastIndex());
     }
 
+//    Remove
+
     public E remove(int index) {
         requireNonEmpty();
         final int targetIndex = getIndex(index);
         final E target = elements[targetIndex];
-        for (int i = targetIndex, last = --end; i < last; i++) {
-            elements[i] = elements[i + 1];
+        if (size < 3 || shiftSize(begin, index) >= shiftSize(index, end - 1)) {
+            end = decrementIndex(end);
+            shiftLeft(targetIndex, end);
+        } else {
+            shiftRight(begin, targetIndex);
+            begin = incrementIndex(begin);
         }
-        if (end < 0) end = 0;
-        elements[end] = null;
         size--;
         return target;
     }
@@ -91,23 +98,25 @@ public class Array<E> {
     public E removeFirst() {
         requireNonEmpty();
         final E target = elements[begin];
-        elements[begin++] = null;
-        if (begin >= length()) begin = 0;
+        elements[begin] = null;
+        begin = incrementIndex(begin);
         size--;
         return target;
     }
 
     public E removeLast() {
         requireNonEmpty();
-        if (--end < 0) end = length() - 1;
+        end = decrementIndex(end);
         final E target = elements[end];
         elements[end] = null;
         size--;
         return target;
     }
 
+//    Index
+
     private int getIndex(int index) {
-        return (begin + index) % length();
+        return incrementIndex(begin, index);
     }
 
     private int getFirstIndex() {
@@ -115,8 +124,46 @@ public class Array<E> {
     }
 
     private int getLastIndex() {
-        return isEmpty() ? 0 : (end - 1 + length()) % length();
+        return isEmpty() ? begin : decrementIndex(end);
     }
+
+    private int incrementIndex(int value) {
+        return incrementIndex(value, 1);
+    }
+
+    private int incrementIndex(int value, int units) {
+        return (value + units) % elements.length;
+    }
+
+    private int decrementIndex(int value) {
+        return decrementIndex(value, 1);
+    }
+
+    private int decrementIndex(int value, int units) {
+        return (value - units + elements.length) % elements.length;
+    }
+
+//    Shift
+
+    private int shiftSize(int from, int to) {
+        return (to + (elements.length - from)) % elements.length;
+    }
+
+    private void shiftLeft(int first, int last) {
+        for (int i = first; i < last; i++) {
+            elements[i] = elements[i + 1];
+        }
+        elements[last] = null;
+    }
+
+    private void shiftRight(int first, int last) {
+        for (int i = last; i > first; i--) {
+            elements[i] = elements[i - 1];
+        }
+        elements[first] = null;
+    }
+
+//    Require
 
     private void requireNonEmpty() {
         if (isEmpty()) throw new RuntimeException("Array is empty");
@@ -124,5 +171,12 @@ public class Array<E> {
 
     private void requireNonFull() {
         if (isFull()) throw new RuntimeException("Array is full");
+    }
+
+    private void requireCapacity(int length) {
+        if (length + size > elements.length) {
+            final String msg = String.format("Not enough array length to add %d value(-s)", length);
+            throw new RuntimeException(msg);
+        }
     }
 }
