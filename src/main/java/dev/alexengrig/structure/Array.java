@@ -1,4 +1,4 @@
-package io.github.alexengrig.nih.collections;
+package dev.alexengrig.structure;
 
 public class Array<E> {
     protected E[] elements;

@@ -1,4 +1,4 @@
-package io.github.alexengrig.nih.collections;
+package dev.alexengrig.structure;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

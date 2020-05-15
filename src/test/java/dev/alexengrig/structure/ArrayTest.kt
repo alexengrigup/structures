@@ -1,4 +1,4 @@
-package io.github.alexengrig.nih.collections
+package dev.alexengrig.structure
 
 import org.junit.Assert
 import org.junit.Test

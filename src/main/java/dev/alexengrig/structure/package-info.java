@@ -5,4 +5,4 @@
  * @author Grig Alex
  * @since 0.1.0
  */
-package io.github.alexengrig.nih.collections;
+package dev.alexengrig.structure;

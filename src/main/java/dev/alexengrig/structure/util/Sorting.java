@@ -1,4 +1,4 @@
-package io.github.alexengrig.nih.collections.util;
+package dev.alexengrig.structure.util;
 
 public class Sorting {
     private Sorting() {
