@@ -1,11 +1,13 @@
 package dev.alexengrig.structures.stack;
 
 public class IntArrayStack implements IntStack {
+    protected static final int DEFAULT_CAPACITY = 8;
+
     protected int size;
     protected int[] array;
 
     public IntArrayStack() {
-        this(8);
+        this(DEFAULT_CAPACITY);
     }
 
     public IntArrayStack(int initialCapacity) {
@@ -31,13 +33,13 @@ public class IntArrayStack implements IntStack {
 
     @Override
     public int pop() {
-        if (empty()) throw new EmptyStackException();
+        requireNonEmpty();
         return array[--size];
     }
 
     @Override
     public int top() {
-        if (empty()) throw new EmptyStackException();
+        requireNonEmpty();
         return array[size - 1];
     }
 
@@ -45,5 +47,9 @@ public class IntArrayStack implements IntStack {
         int[] target = new int[array.length * 2];
         System.arraycopy(array, 0, target, 0, array.length);
         array = target;
+    }
+
+    protected void requireNonEmpty() {
+        if (empty()) throw new EmptyStackException();
     }
 }
