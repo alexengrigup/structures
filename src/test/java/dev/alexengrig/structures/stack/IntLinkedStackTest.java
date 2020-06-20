@@ -5,16 +5,20 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class IntLinkedStackTest {
+    protected IntLinkedStack create() {
+        return new IntLinkedStack();
+    }
+
     @Test
     public void should_create_empty() {
-        IntLinkedStack stack = new IntLinkedStack();
+        IntLinkedStack stack = create();
         assertTrue(stack.empty());
         assertEquals(0, stack.size());
     }
 
     @Test
     public void should_push_24_elements() {
-        IntLinkedStack stack = new IntLinkedStack();
+        IntLinkedStack stack = create();
         for (int i = 0; i < 24; i++) {
             stack.push(i);
         }
@@ -24,7 +28,7 @@ public class IntLinkedStackTest {
 
     @Test
     public void should_pop_24_elements() {
-        IntLinkedStack stack = new IntLinkedStack();
+        IntLinkedStack stack = create();
         for (int i = 0; i < 24; i++) {
             stack.push(i);
         }
@@ -37,7 +41,7 @@ public class IntLinkedStackTest {
 
     @Test
     public void should_return_actualTop() {
-        IntLinkedStack stack = new IntLinkedStack();
+        IntLinkedStack stack = create();
         for (int i = 0; i < 24; i++) {
             stack.push(i);
             assertEquals(i, stack.top());
@@ -48,7 +52,7 @@ public class IntLinkedStackTest {
 
     @Test
     public void should_beDone_workflow() {
-        IntLinkedStack stack = new IntLinkedStack();
+        IntLinkedStack stack = create();
         for (int i = 0; i < 4; i++) {
             stack.push(i);
         }
