@@ -1,6 +1,5 @@
 package dev.alexengrig.structures.stack.bad;
 
-
 import dev.alexengrig.structures.annotation.Bad;
 import dev.alexengrig.structures.stack.IntArrayStack;
 import dev.alexengrig.structures.stack.IntStackWithMax;
