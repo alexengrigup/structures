@@ -5,9 +5,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class IntArrayStackTest {
+    protected IntArrayStack create() {
+        return new IntArrayStack();
+    }
+
     @Test
     public void should_create_empty() {
-        IntArrayStack stack = new IntArrayStack();
+        IntArrayStack stack = create();
         assertTrue(stack.empty());
         assertEquals(0, stack.size());
         assertEquals(8, stack.array.length);
@@ -23,7 +27,7 @@ public class IntArrayStackTest {
 
     @Test
     public void should_push_8_elements() {
-        IntArrayStack stack = new IntArrayStack();
+        IntArrayStack stack = create();
         for (int i = 0; i < 8; i++) {
             stack.push(i);
         }
@@ -34,7 +38,7 @@ public class IntArrayStackTest {
 
     @Test
     public void should_push_12_elements() {
-        IntArrayStack stack = new IntArrayStack();
+        IntArrayStack stack = create();
         for (int i = 0; i < 12; i++) {
             stack.push(i);
         }
@@ -45,7 +49,7 @@ public class IntArrayStackTest {
 
     @Test
     public void should_push_24_elements() {
-        IntArrayStack stack = new IntArrayStack();
+        IntArrayStack stack = create();
         for (int i = 0; i < 24; i++) {
             stack.push(i);
         }
@@ -56,7 +60,7 @@ public class IntArrayStackTest {
 
     @Test
     public void should_pop_8_elements() {
-        IntArrayStack stack = new IntArrayStack();
+        IntArrayStack stack = create();
         for (int i = 0; i < 8; i++) {
             stack.push(i);
         }
@@ -70,7 +74,7 @@ public class IntArrayStackTest {
 
     @Test
     public void should_pop_12_elements() {
-        IntArrayStack stack = new IntArrayStack();
+        IntArrayStack stack = create();
         for (int i = 0; i < 12; i++) {
             stack.push(i);
         }
@@ -84,7 +88,7 @@ public class IntArrayStackTest {
 
     @Test
     public void should_pop_24_elements() {
-        IntArrayStack stack = new IntArrayStack();
+        IntArrayStack stack = create();
         for (int i = 0; i < 24; i++) {
             stack.push(i);
         }
@@ -98,7 +102,7 @@ public class IntArrayStackTest {
 
     @Test
     public void should_return_actualTop() {
-        IntArrayStack stack = new IntArrayStack();
+        IntArrayStack stack = create();
         for (int i = 0; i < 24; i++) {
             stack.push(i);
             assertEquals(i, stack.top());
