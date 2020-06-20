@@ -22,7 +22,7 @@ public class IntLinkedStack implements IntStack {
 
     @Override
     public int pop() {
-        if (empty()) throw new EmptyStackException();
+        requireNonEmpty();
         --size;
         int target = top.value;
         top = top.next;
@@ -31,8 +31,12 @@ public class IntLinkedStack implements IntStack {
 
     @Override
     public int top() {
-        if (empty()) throw new EmptyStackException();
+        requireNonEmpty();
         return top.value;
+    }
+
+    protected void requireNonEmpty() {
+        if (empty()) throw new EmptyStackException();
     }
 
     protected static class Node {
