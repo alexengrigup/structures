@@ -1,4 +1,4 @@
-package dev.alexengrig.structure
+package dev.alexengrig.structures
 
 import org.junit.Assert
 import org.junit.Test

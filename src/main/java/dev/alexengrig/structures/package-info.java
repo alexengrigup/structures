@@ -5,4 +5,4 @@
  * @author Grig Alex
  * @since 0.1.0
  */
-package dev.alexengrig.structure;
+package dev.alexengrig.structures;

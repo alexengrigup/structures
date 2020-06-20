@@ -1,4 +1,4 @@
-package dev.alexengrig.structure;
+package dev.alexengrig.structures;
 
 public class Array<E> {
     protected E[] elements;

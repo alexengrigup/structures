@@ -1,4 +1,4 @@
-package dev.alexengrig.structure;
+package dev.alexengrig.structures;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

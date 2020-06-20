@@ -1,4 +1,4 @@
-package dev.alexengrig.structure.util;
+package dev.alexengrig.structures.util;
 
 public class Sorting {
     private Sorting() {
