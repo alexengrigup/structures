@@ -24,7 +24,9 @@ public class IntArrayStackWithFieldMax extends IntArrayStackWithBruteMax impleme
     @Override
     public int pop() {
         int target = super.pop();
-        if (target == max) {
+        if (empty()) {
+            max = null;
+        } else if (target == max) {
             max = findMax();
         }
         return target;
