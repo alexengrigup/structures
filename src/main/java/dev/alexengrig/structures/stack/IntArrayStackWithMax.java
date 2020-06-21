@@ -11,15 +11,14 @@ public class IntArrayStackWithMax extends IntArrayStack implements IntStackWithM
 
     @Override
     public void push(int value) {
-        requireCapacity();
         if (empty()) {
-            append(value);
+            super.push(value);
             max = value;
         } else if (value > max) {
-            append(2 * value - max);
+            super.push(2 * value - max);
             max = value;
         } else {
-            append(value);
+            super.push(value);
         }
     }
 
