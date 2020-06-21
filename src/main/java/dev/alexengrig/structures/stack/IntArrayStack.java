@@ -27,22 +27,8 @@ public class IntArrayStack implements IntStack {
 
     @Override
     public void push(int value) {
-        requireCapacity();
-        append(value);
-    }
-
-    protected void append(int value) {
-        array[size++] = value;
-    }
-
-    protected void requireCapacity() {
         if (size >= array.length) grow();
-    }
-
-    protected void grow() {
-        int[] target = new int[array.length * 2];
-        System.arraycopy(array, 0, target, 0, array.length);
-        array = target;
+        array[size++] = value;
     }
 
     @Override
@@ -55,6 +41,12 @@ public class IntArrayStack implements IntStack {
     public int top() {
         requireNonEmpty();
         return array[size - 1];
+    }
+
+    protected void grow() {
+        int[] target = new int[array.length * 2];
+        System.arraycopy(array, 0, target, 0, array.length);
+        array = target;
     }
 
     protected void requireNonEmpty() {
