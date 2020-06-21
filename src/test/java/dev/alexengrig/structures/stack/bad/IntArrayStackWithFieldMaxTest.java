@@ -1,6 +1,8 @@
 package dev.alexengrig.structures.stack.bad;
 
-public class IntArrayStackWithFieldMaxTest extends IntArrayStackWithBruteMaxTest {
+import dev.alexengrig.structures.stack.BaseIntStackWithMaxTest;
+
+public class IntArrayStackWithFieldMaxTest extends BaseIntStackWithMaxTest {
     @Override
     protected IntArrayStackWithFieldMax create() {
         return new IntArrayStackWithFieldMax();
