@@ -5,12 +5,16 @@ import dev.alexengrig.structures.stack.IntArrayStack;
 import dev.alexengrig.structures.stack.IntStackWithMax;
 
 @Bad
-public class IntBruteArrayStackWithMax extends IntArrayStack implements IntStackWithMax {
+public class IntArrayStackWithBruteMax extends IntArrayStack implements IntStackWithMax {
     @Override
     public int max() {
         requireNonEmpty();
+        return findMax();
+    }
+
+    protected int findMax() {
         int target = array[0];
-        for (int i = 1, l = array.length; i < l; i++) {
+        for (int i = 1, l = size; i < l; i++) {
             if (array[i] > target) {
                 target = array[i];
             }
