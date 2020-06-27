@@ -40,7 +40,9 @@ public class ArrayStack<E> implements Stack<E> {
     @Override
     public E pop() {
         requireNonEmpty();
-        return array(--size);
+        E target = array(--size);
+        nullify(size);
+        return target;
     }
 
     @Override
@@ -56,5 +58,9 @@ public class ArrayStack<E> implements Stack<E> {
     @SuppressWarnings("unchecked")
     protected E array(int index) {
         return (E) array[index];
+    }
+
+    protected void nullify(int index) {
+        array[index] = null;
     }
 }
