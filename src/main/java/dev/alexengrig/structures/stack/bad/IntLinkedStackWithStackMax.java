@@ -17,7 +17,7 @@ public class IntLinkedStackWithStackMax extends IntLinkedStack implements IntSta
     @Override
     public void push(int value) {
         super.push(value);
-        if (maxStack.empty() || value > maxStack.top()) {
+        if (maxStack.empty() || value >= maxStack.top()) {
             maxStack.push(value);
         }
     }
