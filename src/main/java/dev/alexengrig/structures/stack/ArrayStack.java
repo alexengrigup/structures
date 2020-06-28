@@ -13,8 +13,8 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     public ArrayStack(int initialCapacity) {
-        size = 0;
-        array = new Object[initialCapacity];
+        this.size = 0;
+        this.array = new Object[initialCapacity];
     }
 
     @O("1")
@@ -51,6 +51,10 @@ public class ArrayStack<E> implements Stack<E> {
         return target;
     }
 
+    protected void nullify(int index) {
+        array[index] = null;
+    }
+
     @O("1")
     @Override
     public E top() {
@@ -65,9 +69,5 @@ public class ArrayStack<E> implements Stack<E> {
     @SuppressWarnings("unchecked")
     protected E array(int index) {
         return (E) array[index];
-    }
-
-    protected void nullify(int index) {
-        array[index] = null;
     }
 }

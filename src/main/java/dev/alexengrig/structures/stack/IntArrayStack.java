@@ -13,8 +13,8 @@ public class IntArrayStack implements IntStack {
     }
 
     public IntArrayStack(int initialCapacity) {
-        size = 0;
-        array = new int[initialCapacity];
+        this.size = 0;
+        this.array = new int[initialCapacity];
     }
 
     @O("1")
@@ -36,6 +36,12 @@ public class IntArrayStack implements IntStack {
         array[size++] = value;
     }
 
+    protected void grow() {
+        int[] target = new int[array.length * 2];
+        System.arraycopy(array, 0, target, 0, array.length);
+        array = target;
+    }
+
     @O("1")
     @Override
     public int pop() {
@@ -48,12 +54,6 @@ public class IntArrayStack implements IntStack {
     public int top() {
         requireNonEmpty();
         return array[size - 1];
-    }
-
-    protected void grow() {
-        int[] target = new int[array.length * 2];
-        System.arraycopy(array, 0, target, 0, array.length);
-        array = target;
     }
 
     protected void requireNonEmpty() {
