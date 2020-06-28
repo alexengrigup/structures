@@ -46,4 +46,14 @@ public class ArrayStackWithMax<E extends Comparable<E>> extends ArrayStack<E> im
         }
         return target;
     }
+
+    @O("1")
+    @Override
+    public E top() {
+        E value = super.top();
+        if (comparator.compare(value, maxStack.top()) > 0) {
+            return maxStack.top();
+        }
+        return value;
+    }
 }

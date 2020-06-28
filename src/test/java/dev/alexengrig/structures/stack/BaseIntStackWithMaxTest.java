@@ -11,9 +11,13 @@ public abstract class BaseIntStackWithMaxTest {
     public void should_return_max() {
         IntStackWithMax stack = create();
         stack.push(2);
+        assertEquals(2, stack.top());
         stack.push(1);
+        assertEquals(1, stack.top());
         stack.push(2);
+        assertEquals(2, stack.top());
         stack.push(3);
+        assertEquals(3, stack.top());
         assertEquals(4, stack.size());
         assertEquals(3, stack.max());
         assertEquals(3, stack.pop());

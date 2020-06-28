@@ -46,4 +46,14 @@ public class LinkedStackWithMax<E extends Comparable<E>> extends LinkedStack<E> 
         }
         return target;
     }
+
+    @O("1")
+    @Override
+    public E top() {
+        E value = super.top();
+        if (comparator.compare(value, maxStack.top()) > 0) {
+            return maxStack.top();
+        }
+        return value;
+    }
 }

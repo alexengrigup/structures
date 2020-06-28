@@ -37,4 +37,14 @@ public class IntArrayStackWithMax extends IntArrayStack implements IntStackWithM
         }
         return value;
     }
+
+    @O("1")
+    @Override
+    public int top() {
+        int value = super.top();
+        if (value > max) {
+            return max;
+        }
+        return value;
+    }
 }
