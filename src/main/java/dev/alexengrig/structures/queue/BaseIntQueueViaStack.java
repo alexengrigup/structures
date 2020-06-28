@@ -20,20 +20,17 @@ public abstract class BaseIntQueueViaStack<S extends IntStack> implements IntQue
         return frontStack.size() + backStack.size();
     }
 
-
     @O("1")
     @Override
     public boolean empty() {
         return size() == 0;
     }
 
-
     @O("1")
     @Override
     public void enqueue(int value) {
         backStack.push(value);
     }
-
 
     @O({"1", "n"})
     @Override
