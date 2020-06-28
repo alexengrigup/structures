@@ -3,9 +3,8 @@ package dev.alexengrig.structures.queue;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-public abstract class BaseIntQueueWithMaxTest {
+public abstract class BaseIntQueueWithMaxTest extends BaseIntQueueTest {
     protected abstract IntQueueWithMax create();
 
     @Test
@@ -13,21 +12,20 @@ public abstract class BaseIntQueueWithMaxTest {
         IntQueueWithMax queue = create();
         queue.enqueue(4);
         queue.enqueue(3);
-        queue.enqueue(2);
-        queue.enqueue(3);
-        queue.enqueue(1);
-        assertEquals(5, queue.size());
+        assertEquals(3, queue.back());
+        assertEquals(4, queue.front());
         assertEquals(4, queue.max());
+        queue.enqueue(5);
+        assertEquals(5, queue.max());
+        assertEquals(5, queue.back());
+        queue.enqueue(3);
+        assertEquals(5, queue.max());
+        assertEquals(3, queue.back());
         assertEquals(4, queue.dequeue());
-        assertEquals(3, queue.max());
         assertEquals(3, queue.dequeue());
+        assertEquals(5, queue.dequeue());
         assertEquals(3, queue.max());
-        assertEquals(2, queue.dequeue());
-        assertEquals(3, queue.max());
-        assertEquals(3, queue.dequeue());
-        assertEquals(1, queue.max());
-        assertEquals(1, queue.dequeue());
-        assertEquals(0, queue.size());
-        assertTrue(queue.empty());
+        assertEquals(3, queue.front());
+        assertEquals(3, queue.back());
     }
 }

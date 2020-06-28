@@ -10,6 +10,11 @@ public abstract class BaseIntQueueWithMaxViaStack
     @Override
     public int max() {
         requireNonEmpty();
-        return frontStack.empty() ? backStack.max() : frontStack.max();
+        if (frontStack.empty()) {
+            return backStack.max();
+        } else if (backStack.empty()) {
+            return frontStack.max();
+        }
+        return Math.max(frontStack.max(), backStack.max());
     }
 }
