@@ -1,14 +1,18 @@
 package dev.alexengrig.structures.stack;
 
+import dev.alexengrig.structures.annotation.O;
+
 public class IntLinkedStackWithMax extends IntLinkedStack implements IntStackWithMax {
     protected Integer max;
 
+    @O("1")
     @Override
     public int max() {
         requireNonEmpty();
         return max;
     }
 
+    @O("1")
     @Override
     public void push(int value) {
         if (empty()) {
@@ -22,6 +26,7 @@ public class IntLinkedStackWithMax extends IntLinkedStack implements IntStackWit
         }
     }
 
+    @O("1")
     @Override
     public int pop() {
         int value = super.pop();

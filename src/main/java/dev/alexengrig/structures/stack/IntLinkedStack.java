@@ -1,25 +1,31 @@
 package dev.alexengrig.structures.stack;
 
+import dev.alexengrig.structures.annotation.O;
+
 public class IntLinkedStack implements IntStack {
     protected int size;
     protected Node top;
 
+    @O("1")
     @Override
     public int size() {
         return size;
     }
 
+    @O("1")
     @Override
     public boolean empty() {
         return null == top;
     }
 
+    @O("1")
     @Override
     public void push(int value) {
         ++size;
         top = new Node(value, top);
     }
 
+    @O("1")
     @Override
     public int pop() {
         requireNonEmpty();
@@ -29,6 +35,7 @@ public class IntLinkedStack implements IntStack {
         return target;
     }
 
+    @O("1")
     @Override
     public int top() {
         requireNonEmpty();

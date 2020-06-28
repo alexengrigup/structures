@@ -1,14 +1,18 @@
 package dev.alexengrig.structures.stack;
 
+import dev.alexengrig.structures.annotation.O;
+
 public class IntLinkedStackWithMin extends IntLinkedStack implements IntStackWithMin {
     protected Integer min;
 
+    @O("1")
     @Override
     public int min() {
         requireNonEmpty();
         return min;
     }
 
+    @O("1")
     @Override
     public void push(int value) {
         if (empty()) {
@@ -22,6 +26,7 @@ public class IntLinkedStackWithMin extends IntLinkedStack implements IntStackWit
         }
     }
 
+    @O("1")
     @Override
     public int pop() {
         int value = super.pop();

@@ -1,5 +1,7 @@
 package dev.alexengrig.structures.stack;
 
+import dev.alexengrig.structures.annotation.O;
+
 import java.util.Comparator;
 
 public class ArrayStackWithMax<E extends Comparable<E>> extends ArrayStack<E> implements StackWithMax<E> {
@@ -19,12 +21,14 @@ public class ArrayStackWithMax<E extends Comparable<E>> extends ArrayStack<E> im
         return new ArrayStack<>();
     }
 
+    @O("1")
     @Override
     public E max() {
         requireNonEmpty();
         return maxStack.top();
     }
 
+    @O("1")
     @Override
     public void push(E value) {
         super.push(value);
@@ -33,6 +37,7 @@ public class ArrayStackWithMax<E extends Comparable<E>> extends ArrayStack<E> im
         }
     }
 
+    @O("1")
     @Override
     public E pop() {
         E target = super.pop();

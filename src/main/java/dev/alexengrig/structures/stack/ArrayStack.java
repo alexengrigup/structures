@@ -1,5 +1,7 @@
 package dev.alexengrig.structures.stack;
 
+import dev.alexengrig.structures.annotation.O;
+
 public class ArrayStack<E> implements Stack<E> {
     protected static final int DEFAULT_CAPACITY = 8;
 
@@ -15,16 +17,19 @@ public class ArrayStack<E> implements Stack<E> {
         array = new Object[initialCapacity];
     }
 
+    @O("1")
     @Override
     public int size() {
         return size;
     }
 
+    @O("1")
     @Override
     public boolean empty() {
         return size == 0;
     }
 
+    @O("1")
     @Override
     public void push(E value) {
         if (size >= array.length) grow();
@@ -37,6 +42,7 @@ public class ArrayStack<E> implements Stack<E> {
         array = target;
     }
 
+    @O("1")
     @Override
     public E pop() {
         requireNonEmpty();
@@ -45,6 +51,7 @@ public class ArrayStack<E> implements Stack<E> {
         return target;
     }
 
+    @O("1")
     @Override
     public E top() {
         requireNonEmpty();

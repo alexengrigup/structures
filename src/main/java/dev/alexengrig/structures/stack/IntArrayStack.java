@@ -1,5 +1,7 @@
 package dev.alexengrig.structures.stack;
 
+import dev.alexengrig.structures.annotation.O;
+
 public class IntArrayStack implements IntStack {
     protected static final int DEFAULT_CAPACITY = 8;
 
@@ -15,28 +17,33 @@ public class IntArrayStack implements IntStack {
         array = new int[initialCapacity];
     }
 
+    @O("1")
     @Override
     public int size() {
         return size;
     }
 
+    @O("1")
     @Override
     public boolean empty() {
         return size == 0;
     }
 
+    @O("1")
     @Override
     public void push(int value) {
         if (size >= array.length) grow();
         array[size++] = value;
     }
 
+    @O("1")
     @Override
     public int pop() {
         requireNonEmpty();
         return array[--size];
     }
 
+    @O("1")
     @Override
     public int top() {
         requireNonEmpty();
