@@ -3,16 +3,16 @@ package dev.alexengrig.structures.queue;
 import dev.alexengrig.structures.annotation.O;
 import dev.alexengrig.structures.stack.IntStack;
 
-public abstract class BaseIntQueueViaStack implements IntQueue {
-    protected final IntStack frontStack;
-    protected final IntStack backStack;
+public abstract class BaseIntQueueViaStack<S extends IntStack> implements IntQueue {
+    protected final S frontStack;
+    protected final S backStack;
 
     protected BaseIntQueueViaStack() {
         this.frontStack = createStack();
         this.backStack = createStack();
     }
 
-    protected abstract IntStack createStack();
+    protected abstract S createStack();
 
     @O("1")
     @Override
@@ -59,7 +59,7 @@ public abstract class BaseIntQueueViaStack implements IntQueue {
         return backStack.top();
     }
 
-    private void requireNonEmpty() {
+    protected void requireNonEmpty() {
         if (empty()) throw new EmptyQueueException();
     }
 
@@ -71,7 +71,7 @@ public abstract class BaseIntQueueViaStack implements IntQueue {
         if (backStack.empty()) transfer(frontStack, backStack);
     }
 
-    protected void transfer(IntStack from, IntStack to) {
+    protected void transfer(S from, S to) {
         while (!from.empty()) {
             to.push(from.pop());
         }
