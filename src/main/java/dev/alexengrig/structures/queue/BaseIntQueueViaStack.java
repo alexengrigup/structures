@@ -1,5 +1,6 @@
 package dev.alexengrig.structures.queue;
 
+import dev.alexengrig.structures.annotation.O;
 import dev.alexengrig.structures.stack.IntStack;
 
 public abstract class BaseIntQueueViaStack implements IntQueue {
@@ -13,21 +14,28 @@ public abstract class BaseIntQueueViaStack implements IntQueue {
 
     protected abstract IntStack createStack();
 
+    @O("1")
     @Override
     public int size() {
         return frontStack.size() + backStack.size();
     }
 
+
+    @O("1")
     @Override
     public boolean empty() {
         return size() == 0;
     }
 
+
+    @O("1")
     @Override
     public void enqueue(int value) {
         backStack.push(value);
     }
 
+
+    @O({"1", "n"})
     @Override
     public int dequeue() {
         requireNonEmpty();
@@ -35,6 +43,7 @@ public abstract class BaseIntQueueViaStack implements IntQueue {
         return frontStack.pop();
     }
 
+    @O({"1", "n"})
     @Override
     public int front() {
         requireNonEmpty();
@@ -42,6 +51,7 @@ public abstract class BaseIntQueueViaStack implements IntQueue {
         return frontStack.top();
     }
 
+    @O({"1", "n"})
     @Override
     public int back() {
         requireNonEmpty();
