@@ -1,11 +1,13 @@
 package dev.alexengrig.structures.stack.bad;
 
 import dev.alexengrig.structures.annotation.Bad;
+import dev.alexengrig.structures.annotation.O;
 import dev.alexengrig.structures.stack.IntLinkedStack;
 import dev.alexengrig.structures.stack.IntStackWithMax;
 
 @Bad
 public class IntLinkedStackWithBruteMax extends IntLinkedStack implements IntStackWithMax {
+    @O("n")
     @Override
     public int max() {
         requireNonEmpty();

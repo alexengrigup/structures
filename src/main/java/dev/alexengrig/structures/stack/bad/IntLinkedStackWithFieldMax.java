@@ -1,18 +1,21 @@
 package dev.alexengrig.structures.stack.bad;
 
 import dev.alexengrig.structures.annotation.Bad;
+import dev.alexengrig.structures.annotation.O;
 import dev.alexengrig.structures.stack.IntStackWithMax;
 
 @Bad
 public class IntLinkedStackWithFieldMax extends IntLinkedStackWithBruteMax implements IntStackWithMax {
     protected Integer max;
 
+    @O("1")
     @Override
     public int max() {
         requireNonEmpty();
         return max;
     }
 
+    @O("1")
     @Override
     public void push(int value) {
         super.push(value);
@@ -21,6 +24,7 @@ public class IntLinkedStackWithFieldMax extends IntLinkedStackWithBruteMax imple
         }
     }
 
+    @O("n")
     @Override
     public int pop() {
         int target = super.pop();
