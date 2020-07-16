@@ -10,5 +10,8 @@ public interface IntHeap {
     boolean empty();
 
     interface Index {
+        int get();
+
+        boolean valid();
     }
 }
