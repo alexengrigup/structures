@@ -5,5 +5,5 @@ public interface IntMinHeap extends IntHeap {
 
     int extractMin();
 
-    int decrease(Index index, int value);
+    int decrease(Index index, int newValue);
 }
