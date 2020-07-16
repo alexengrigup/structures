@@ -13,7 +13,7 @@ public class IntPlainArray implements IntArray {
     }
 
     @Override
-    public int at(int index, int value) {
+    public int set(int index, int value) {
         int target = array[index];
         array[index] = value;
         return target;
