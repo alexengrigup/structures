@@ -83,6 +83,14 @@ public class IntMinBinaryHeap implements IntMinHeap {
         if (!index.valid()) throw new InvalidHeapIndexException();
     }
 
+    protected void swap(int from, int to) {
+        Node temp = array[from];
+        array[from] = array[to];
+        array[from].setIndex(from);
+        array[to] = temp;
+        array[to].setIndex(to);
+    }
+
     protected void siftUp(int index) {
         int child = index;
         int parent = parent(child);
@@ -93,45 +101,38 @@ public class IntMinBinaryHeap implements IntMinHeap {
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     protected void siftDown(int index) {
         int parent = index;
-        int rightChild = rightChild(parent);
-        int leftChild = leftChild(parent);
-        while (parent < size && (value(parent) >= value(rightChild) || value(parent) >= value(leftChild))) {
-            if (value(parent) > value(rightChild)) {
-                swap(parent, rightChild);
-                parent = rightChild;
+        int left = left(parent);
+        int right = right(parent);
+        while ((left < size && value(left) <= value(parent)) || (right < size && value(right) <= value(parent))) {
+            if (value(left) >= value(right)) {
+                swap(parent, right);
+                parent = right;
             } else {
-                swap(parent, leftChild);
-                parent = leftChild;
+                swap(parent, left);
+                parent = left;
             }
-            rightChild = rightChild(parent);
-            leftChild = leftChild(parent);
+            left = left(parent);
+            right = right(parent);
         }
-    }
-
-    protected void swap(int from, int to) {
-        Node temp = array[from];
-        array[from] = array[to];
-        array[from].setIndex(from);
-        array[to] = temp;
-        array[to].setIndex(to);
-    }
-
-    protected int value(int index) {
-        return array[index].value;
     }
 
     protected int parent(int index) {
         return (index - 1) / 2;
     }
 
-    protected int leftChild(int index) {
+    protected int left(int index) {
         return index * 2 + 1;
     }
 
-    protected int rightChild(int index) {
+    protected int right(int index) {
         return index * 2 + 2;
+    }
+
+    protected int value(int index) {
+        return array[index].value;
     }
 
     protected Node node(int index) {
@@ -139,16 +140,21 @@ public class IntMinBinaryHeap implements IntMinHeap {
     }
 
     protected class Node {
-        public int value;
-        public Pointer pointer;
+        protected int value;
+        protected Pointer pointer;
 
-        public Node(int value, int index) {
+        protected Node(int value, int index) {
             this.value = value;
             this.pointer = new Pointer(index);
         }
 
-        public void setIndex(int index) {
+        protected void setIndex(int index) {
             this.pointer.index = index;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Node(%d: %d%s)", pointer.index, value, pointer.removed ? " - REMOVED" : "");
         }
     }
 
