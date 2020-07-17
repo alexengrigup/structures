@@ -101,6 +101,19 @@ public class IntMinBinaryHeapTest {
     }
 
     @Test
+    public void should_sort_largeValues_via_heap() {
+        IntMinHeap heap = create();
+        int[] array = new int[1_000_000];
+        for (int i = array.length - 1, value = Integer.MAX_VALUE; i >= 0; i--, value--) {
+            array[i] = value;
+            heap.insert(value);
+        }
+        for (int value : array) {
+            assertEquals(value, heap.extractMin());
+        }
+    }
+
+    @Test
     public void should_throw_invalidHeapIndexException_on_removed() {
         IntMinHeap heap = create();
         IntHeap.Index index = heap.insert(1);
