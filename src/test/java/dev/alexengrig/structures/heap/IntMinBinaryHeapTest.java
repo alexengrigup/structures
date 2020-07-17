@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class IntMinBinaryHeapTest {
-    protected IntMinBinaryHeap create() {
+    protected IntMinHeap create() {
         return new IntMinBinaryHeap();
     }
 
@@ -107,5 +107,17 @@ public class IntMinBinaryHeapTest {
                 return false;
             }
         }, 0);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void should_throw_nullPointerException_on_extract() {
+        IntMinHeap heap = create();
+        heap.extract(null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void should_throw_nullPointerException_on_decrease() {
+        IntMinHeap heap = create();
+        heap.decrease(null, 0);
     }
 }

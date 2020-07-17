@@ -3,6 +3,7 @@ package dev.alexengrig.structures.heap;
 import dev.alexengrig.structures.annotation.O;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class IntMinBinaryHeap implements IntMinHeap {
     protected static final int DEFAULT_CAPACITY = 15;
@@ -45,6 +46,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
     @O("log(n)")
     @Override
     public int extract(Index index) {
+        Objects.requireNonNull(index, "The index must not be null");
         requireNonEmpty();
         requireValidIndex(index);
         decrease(index, value(0) - 1);
@@ -72,6 +74,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
     @O("log(n)")
     @Override
     public int decrease(Index index, int newValue) {
+        Objects.requireNonNull(index, "The index must not be null");
         requireNonEmpty();
         requireValidIndex(index);
         Node node = node(index.get());
