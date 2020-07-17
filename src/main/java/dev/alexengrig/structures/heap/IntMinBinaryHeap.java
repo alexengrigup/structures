@@ -49,7 +49,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
         Objects.requireNonNull(index, "The index must not be null");
         requireNonEmpty();
         requireValidIndex(index);
-        decrease(index, value(0) - 1);
+        update(index, value(0) - 1);
         return extractMin();
     }
 
@@ -77,16 +77,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
         Objects.requireNonNull(index, "The index must not be null");
         requireNonEmpty();
         requireValidIndex(index);
-        Node node = node(index.get());
-        if (newValue >= node.value) {
-            throw new IllegalArgumentException(
-                    String.format("The new value must be less than the current value: %d >= %d",
-                            newValue, node.value));
-        }
-        int target = node.value;
-        node.value = newValue;
-        siftUp(node.pointer.index);
-        return target;
+        return update(index, newValue);
     }
 
     protected void requireNonEmpty() {
@@ -131,6 +122,14 @@ public class IntMinBinaryHeap implements IntMinHeap {
             left = left(parent);
             right = right(parent);
         }
+    }
+
+    protected int update(Index index, int newValue) {
+        Node node = node(index.get());
+        int target = node.value;
+        node.value = newValue;
+        siftUp(node.pointer.index);
+        return target;
     }
 
     protected int parent(int index) {
