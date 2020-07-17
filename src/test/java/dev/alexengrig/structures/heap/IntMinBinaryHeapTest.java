@@ -70,6 +70,22 @@ public class IntMinBinaryHeapTest {
     }
 
     @Test
+    public void should_decrease_values() {
+        IntMinHeap heap = create();
+        int[] numbers = {10, 20, 30, 40, 50};
+        IntHeap.Index[] indices = new IntHeap.Index[numbers.length];
+        for (int i = 0, numbersLength = numbers.length; i < numbersLength; i++) {
+            indices[i] = heap.insert(numbers[i]);
+        }
+        for (int i = 0, indicesLength = indices.length; i < indicesLength; i++) {
+            assertEquals(numbers[i], heap.decrease(indices[i], numbers[i] / 2));
+        }
+        for (int number : numbers) {
+            assertEquals(number / 2, heap.extractMin());
+        }
+    }
+
+    @Test
     public void should_sort_values_via_heap() {
         IntMinHeap heap = create();
         List<Integer> values = Arrays.asList(3, 1, 2, 5, 4);
