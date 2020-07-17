@@ -181,4 +181,11 @@ public class IntMinBinaryHeapTest {
             }
         }, 0);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_throw_illegalArgumentException_on_decrease() {
+        IntMinHeap heap = create();
+        IntHeap.Index index = heap.insert(1);
+        heap.decrease(index, 100);
+    }
 }

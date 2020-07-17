@@ -125,6 +125,10 @@ public class IntMinBinaryHeap implements IntMinHeap {
     protected int update(Index index, int newValue) {
         Node node = node(index);
         int target = node.value;
+        if (newValue >= target) {
+            throw new IllegalArgumentException(
+                    String.format("The new value must be less than the current value: %d >= %d", newValue, target));
+        }
         node.value = newValue;
         siftUp(node.pointer.index);
         return target;
