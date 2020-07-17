@@ -49,8 +49,10 @@ public class IntMinBinaryHeap implements IntMinHeap {
         Objects.requireNonNull(index, "The index must not be null");
         requireNonEmpty();
         requireValidIndex(index);
+        int target = value(index);
         update(index, value(0) - 1);
-        return extractMin();
+        extractMin();
+        return target;
     }
 
     @O("1")
@@ -125,7 +127,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
     }
 
     protected int update(Index index, int newValue) {
-        Node node = node(index.get());
+        Node node = node(index);
         int target = node.value;
         node.value = newValue;
         siftUp(node.pointer.index);
@@ -148,8 +150,16 @@ public class IntMinBinaryHeap implements IntMinHeap {
         return array[index].value;
     }
 
+    protected int value(Index index) {
+        return value(index.get());
+    }
+
     protected Node node(int index) {
         return array[index];
+    }
+
+    protected Node node(Index index) {
+        return node(index.get());
     }
 
     protected class Node {

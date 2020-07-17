@@ -71,6 +71,20 @@ public class IntMinBinaryHeapTest {
         assertArrayEquals(new int[]{1, 2, 3, 4, 5}, actual);
     }
 
+    @Test
+    public void should_throw_invalidHeapIndexException_on_removed() {
+        IntMinHeap heap = create();
+        IntHeap.Index index = heap.insert(1);
+        heap.insert(0);
+        assertEquals(1, heap.extract(index));
+        assertEquals(0, heap.min());
+        try {
+            heap.extract(index);
+            fail();
+        } catch (InvalidHeapIndexException ignored) {
+        }
+    }
+
     @Test(expected = EmptyHeapException.class)
     public void should_throw_emptyHeapException_on_extract() {
         IntMinHeap heap = create();
