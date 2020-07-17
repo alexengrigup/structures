@@ -1,5 +1,7 @@
 package dev.alexengrig.structures.heap;
 
+import dev.alexengrig.structures.annotation.O;
+
 import java.util.Arrays;
 
 public class IntMinBinaryHeap implements IntMinHeap {
@@ -13,16 +15,19 @@ public class IntMinBinaryHeap implements IntMinHeap {
         this.array = new Node[DEFAULT_CAPACITY];
     }
 
+    @O("1")
     @Override
     public int size() {
         return size;
     }
 
+    @O("1")
     @Override
     public boolean empty() {
         return size == 0;
     }
 
+    @O("log(n)")
     @Override
     public Pointer insert(int value) {
         if (size >= array.length) grow();
@@ -37,6 +42,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
         array = Arrays.copyOf(array, array.length * 2 + 1);
     }
 
+    @O("log(n)")
     @Override
     public int extract(Index index) {
         requireValidIndex(index);
@@ -44,12 +50,14 @@ public class IntMinBinaryHeap implements IntMinHeap {
         return extractMin();
     }
 
+    @O("1")
     @Override
     public int min() {
         requireNonEmpty();
         return value(0);
     }
 
+    @O("log(n)")
     @Override
     public int extractMin() {
         requireNonEmpty();
@@ -60,6 +68,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
         return node.value;
     }
 
+    @O("log(n)")
     @Override
     public int decrease(Index index, int newValue) {
         requireValidIndex(index);
