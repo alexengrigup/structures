@@ -51,7 +51,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
         requireValidIndex(index);
         int target = value(index);
         update(index, value(0) - 1);
-        extractMin();
+        extractFirst();
         return target;
     }
 
@@ -66,11 +66,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
     @Override
     public int extractMin() {
         requireNonEmpty();
-        Node node = node(0);
-        node.pointer.removed = true;
-        swap(0, --size);
-        siftDown(0);
-        return node.value;
+        return extractFirst();
     }
 
     @O("log(n)")
@@ -113,8 +109,8 @@ public class IntMinBinaryHeap implements IntMinHeap {
         int parent = index;
         int left = left(parent);
         int right = right(parent);
-        while ((left < size && value(left) <= value(parent)) || (right < size && value(right) <= value(parent))) {
-            if (value(left) >= value(right)) {
+        while ((left < size && value(left) < value(parent)) || (right < size && value(right) < value(parent))) {
+            if (right < size && value(right) <= value(left)) {
                 swap(parent, right);
                 parent = right;
             } else {
@@ -132,6 +128,14 @@ public class IntMinBinaryHeap implements IntMinHeap {
         node.value = newValue;
         siftUp(node.pointer.index);
         return target;
+    }
+
+    protected int extractFirst() {
+        Node node = node(0);
+        node.pointer.removed = true;
+        swap(0, --size);
+        siftDown(0);
+        return node.value;
     }
 
     protected int parent(int index) {

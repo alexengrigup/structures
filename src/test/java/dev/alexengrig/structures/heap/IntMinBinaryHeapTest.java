@@ -57,6 +57,19 @@ public class IntMinBinaryHeapTest {
     }
 
     @Test
+    public void should_extract_values() {
+        IntMinHeap heap = create();
+        int[] numbers = {1, 2, 3, 4, 5};
+        IntHeap.Index[] indices = new IntHeap.Index[numbers.length];
+        for (int i = 0, numbersLength = numbers.length; i < numbersLength; i++) {
+            indices[i] = heap.insert(numbers[i]);
+        }
+        for (int i = 0, indicesLength = indices.length; i < indicesLength; i++) {
+            assertEquals(numbers[i], heap.extract(indices[i]));
+        }
+    }
+
+    @Test
     public void should_sort_values_via_heap() {
         IntMinHeap heap = create();
         List<Integer> values = Arrays.asList(3, 1, 2, 5, 4);
