@@ -70,4 +70,42 @@ public class IntMinBinaryHeapTest {
         }
         assertArrayEquals(new int[]{1, 2, 3, 4, 5}, actual);
     }
+
+    @Test(expected = EmptyHeapException.class)
+    public void should_throw_emptyHeapException_on_extract() {
+        IntMinHeap heap = create();
+        heap.extract(new IntHeap.Index() {
+            @Override
+            public int get() {
+                return 0;
+            }
+
+            @Override
+            public boolean valid() {
+                return false;
+            }
+        });
+    }
+
+    @Test(expected = EmptyHeapException.class)
+    public void should_throw_emptyHeapException_on_min() {
+        IntMinHeap heap = create();
+        heap.min();
+    }
+
+    @Test(expected = EmptyHeapException.class)
+    public void should_throw_emptyHeapException_on_decrease() {
+        IntMinHeap heap = create();
+        heap.decrease(new IntHeap.Index() {
+            @Override
+            public int get() {
+                return 0;
+            }
+
+            @Override
+            public boolean valid() {
+                return false;
+            }
+        }, 0);
+    }
 }

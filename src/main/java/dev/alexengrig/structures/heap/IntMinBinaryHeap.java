@@ -45,6 +45,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
     @O("log(n)")
     @Override
     public int extract(Index index) {
+        requireNonEmpty();
         requireValidIndex(index);
         decrease(index, value(0) - 1);
         return extractMin();
@@ -71,6 +72,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
     @O("log(n)")
     @Override
     public int decrease(Index index, int newValue) {
+        requireNonEmpty();
         requireValidIndex(index);
         Node node = node(index.get());
         if (newValue >= node.value) {
