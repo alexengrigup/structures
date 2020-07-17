@@ -120,4 +120,38 @@ public class IntMinBinaryHeapTest {
         IntMinHeap heap = create();
         heap.decrease(null, 0);
     }
+
+    @Test(expected = InvalidHeapIndexException.class)
+    public void should_throw_invalidHeapIndexException_on_extract() {
+        IntMinHeap heap = create();
+        heap.insert(1);
+        heap.extract(new IntHeap.Index() {
+            @Override
+            public int get() {
+                return 0;
+            }
+
+            @Override
+            public boolean valid() {
+                return true;
+            }
+        });
+    }
+
+    @Test(expected = InvalidHeapIndexException.class)
+    public void should_throw_invalidHeapIndexException_on_decrease() {
+        IntMinHeap heap = create();
+        heap.insert(1);
+        heap.decrease(new IntHeap.Index() {
+            @Override
+            public int get() {
+                return 0;
+            }
+
+            @Override
+            public boolean valid() {
+                return true;
+            }
+        }, 0);
+    }
 }

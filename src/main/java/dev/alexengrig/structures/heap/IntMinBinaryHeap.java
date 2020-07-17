@@ -85,7 +85,7 @@ public class IntMinBinaryHeap implements IntMinHeap {
     }
 
     protected void requireValidIndex(Index index) {
-        if (!index.valid()) throw new InvalidHeapIndexException();
+        if (!index.valid() || !(index instanceof Pointer)) throw new InvalidHeapIndexException();
     }
 
     protected void swap(int from, int to) {
