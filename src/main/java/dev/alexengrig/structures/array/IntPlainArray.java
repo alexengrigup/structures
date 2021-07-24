@@ -1,6 +1,7 @@
 package dev.alexengrig.structures.array;
 
 import java.util.Arrays;
+import java.util.function.IntFunction;
 
 public class IntPlainArray implements IntArray {
     protected final int[] values;
@@ -15,6 +16,16 @@ public class IntPlainArray implements IntArray {
 
     public static IntPlainArray from(int[] values) {
         return new IntPlainArray(values);
+    }
+
+    @Override
+    public int compute(int index, IntFunction<Integer> updater) {
+        int value = at(index);
+        Integer newValue = updater.apply(value);
+        if (newValue != null) {
+            return set(index, newValue);
+        }
+        throw new NullPointerException();
     }
 
     @Override
