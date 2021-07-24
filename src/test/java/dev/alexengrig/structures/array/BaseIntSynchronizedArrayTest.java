@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,11 +32,11 @@ public abstract class BaseIntSynchronizedArrayTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {1, 2, 3},
-                {4, 2, 100_000},
-                {4, 3, 100_000},
-                {4, 4, 100_000},
-                {4, 5, 100_000},
-                {4, 6, 100_000},
+                {4, 2, 1000_000},
+                {4, 3, 1000_000},
+                {4, 4, 1000_000},
+                {4, 5, 1000_000},
+                {4, 6, 1000_000},
                 {4, Runtime.getRuntime().availableProcessors(), 1000_000},
         });
     }
@@ -62,9 +64,11 @@ public abstract class BaseIntSynchronizedArrayTest {
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
 
         Collection<Callable<Object>> tasks = Collections.nCopies(expected, task);
+        Instant start = Instant.now();
         executorService.invokeAll(tasks);
+        Instant end = Instant.now();
 
-        System.out.println(array);
+        System.out.println("Time: " + Duration.between(start, end));
 
         int[] expectedValues = new int[length];
         Arrays.fill(expectedValues, expected);
