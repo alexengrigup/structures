@@ -35,6 +35,7 @@ public abstract class BaseIntSynchronizedArrayTest {
                 {4, 4, 100_000},
                 {4, 5, 100_000},
                 {4, 6, 100_000},
+                {4, Runtime.getRuntime().availableProcessors(), 1000_000},
         });
     }
 
