@@ -1,5 +1,7 @@
 package dev.alexengrig.structures.array;
 
+import java.util.function.IntFunction;
+
 public interface IntArray {
     static void swap(IntArray array, int from, int to) {
         array.set(to, array.set(from, array.at(to)));
@@ -29,6 +31,8 @@ public interface IntArray {
         array[to] = array[from] ^ array[to];
         array[from] = array[from] ^ array[to];
     }
+
+    int compute(int index, IntFunction<Integer> updater);
 
     int at(int index);
 
