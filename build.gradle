@@ -11,12 +11,11 @@ repositories {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
 
 group = 'dev.alexengrig'
 version = '0.1.0-SNAPSHOT'
-sourceCompatibility = '1.8'
 
 publishing {
     repositories {
